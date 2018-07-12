@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :queued_color, only: [:index, :show, :create, :destroy]
+  resources :queued_colors, only: [:index, :show, :create, :destroy]
 
   resources :displayed_colors, only: [:index, :create]
 
