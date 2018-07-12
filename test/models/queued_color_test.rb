@@ -16,7 +16,7 @@ describe QueuedColor do
     queued_color.errors.must_include :color
   end
 
-  it "must have a color that is between 7 and 9 char in length" do
+  it "must have a color that is between 7 and 10 char in length" do
     queued_color.color = "0, 0"
     value(queued_color).wont_be :valid?
 
