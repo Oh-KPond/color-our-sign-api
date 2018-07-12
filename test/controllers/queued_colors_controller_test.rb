@@ -1,7 +1,35 @@
 require "test_helper"
 
 describe QueuedColorsController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
+  describe "index" do
+    it "is a working route" do
+      get queued_colors_url
+
+      must_respond_with :success
+    end
+
+    it "return json" do
+      get queued_colors_url
+
+      response.header['Content-Type'].must_include "json"
+    end
+
+    it "returns an string" do
+      get queued_colors_url
+
+      body = JSON.parse(response.body)
+      body.must_be_kind_of Hash
+    end
+
+    it "returns null if there are no queued_colors" do
+      QueuedColor.all.each do |entry|
+        entry.destroy
+      end
+
+      get queued_colors_url
+
+      body = JSON.parse(response.body)
+      body.must_be_nil
+    end
+  end
 end
