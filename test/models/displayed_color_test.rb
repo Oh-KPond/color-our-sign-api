@@ -12,15 +12,15 @@ describe DisplayedColor do
     displayed_color.color = nil
 
     # Then
-    displayed_color.valid?.must_equal false
+    value(displayed_color).wont_be :valid?
     displayed_color.errors.must_include :color
   end
 
   it "must have a color that is between 7 and 9 char in length" do
     displayed_color.color = "0, 0"
-    displayed_color.valid?.must_equal false
+    value(displayed_color).wont_be :valid?
 
     displayed_color.color = "51, 51, 51, 0"
-    displayed_color.valid?.must_equal false
+    value(displayed_color).wont_be :valid?
   end
 end

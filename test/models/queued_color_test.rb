@@ -12,15 +12,15 @@ describe QueuedColor do
     queued_color.color = nil
 
     # Then
-    queued_color.valid?.must_equal false
+    value(queued_color).wont_be :valid?
     queued_color.errors.must_include :color
   end
 
   it "must have a color that is between 7 and 9 char in length" do
     queued_color.color = "0, 0"
-    queued_color.valid?.must_equal false
+    value(queued_color).wont_be :valid?
 
     queued_color.color = "51, 51, 51, 0"
-    queued_color.valid?.must_equal false
+    value(queued_color).wont_be :valid?
   end
 end
