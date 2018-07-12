@@ -1,0 +1,2 @@
+class DisplayedColor < ApplicationRecord
+end

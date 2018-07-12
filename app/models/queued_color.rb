@@ -1,0 +1,2 @@
+class QueuedColor < ApplicationRecord
+end
