@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'color', to: 'queued_colors#color', as: 'color'
 
-  resources :queued_colors, only: [:index, :show, :create, :destroy]
+  resources :queued_colors, only: [:index, :create]
 
   resources :displayed_colors, only: [:index, :create]
 

@@ -1,8 +1,8 @@
 class QueuedColorsController < ApplicationController
 
   def index
-    color = QueuedColor.all
-    render json: color.as_json, status: :ok
+    colors = QueuedColor.all
+    render json: colors.as_json, status: :ok
   end
 
   def color
