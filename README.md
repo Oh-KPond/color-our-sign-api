@@ -9,6 +9,13 @@
 3. run `bundle install`
 4. run `rails s`
 
+## API Description
+
+#### `GET /queued_colors`
+Lists all queues colors and their created at timestamps
+
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
