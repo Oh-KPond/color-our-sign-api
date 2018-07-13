@@ -15,4 +15,18 @@ class QueuedColorsController < ApplicationController
     end
   end
 
+  def create
+    color = QueuedColor.new(color_params)
+    if color.save
+      render json: {id: color.id}, status: :ok
+    else
+      render json: {ok: false, errors: color.errors}, status: :bad_request
+    end
+  end
+end
+
+private
+
+def color_params
+  return params.permit(:color)
 end
