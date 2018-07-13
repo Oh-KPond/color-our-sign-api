@@ -36,22 +36,22 @@ describe QueuedColorsController do
 
   describe "color" do
     it "is a working route" do
-      get color
+      get color_url
 
       must_respond_with :success
     end
 
     it "return json" do
-      get color
+      get color_url
 
       response.header['Content-Type'].must_include "json"
     end
 
     it "returns an string" do
-      get color
+      get color_url
 
-      body = JSON.parse(response.body)
-      body.must_be_kind_of Hash
+      body = response.body
+      body.must_be_kind_of String
     end
 
     it "returns null if there are no queued_colors" do
@@ -59,7 +59,7 @@ describe QueuedColorsController do
         entry.destroy
       end
 
-      get queued_colors_url
+      get color_url
 
       body = JSON.parse(response.body)
       body.must_be_nil
