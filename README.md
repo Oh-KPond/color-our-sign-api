@@ -14,6 +14,9 @@
 #### `GET /queued_colors`
 Lists all queues colors and their created at timestamps
 
+#### `GET /color`
+Returns single string with color information
+
 
 
 This README would normally document whatever steps are necessary to get the
