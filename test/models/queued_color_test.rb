@@ -16,11 +16,13 @@ describe QueuedColor do
     queued_color.errors.must_include :color
   end
 
-  it "must have a color that is between 7 and 10 char in length" do
-    queued_color.color = "0, 0"
-    value(queued_color).wont_be :valid?
-
-    queued_color.color = "51, 51, 51, 0"
-    value(queued_color).wont_be :valid?
-  end
+  # it "must have a color that is between 7 and 10 char in length" do
+  #   queued_color.color = "0, 0"
+  #   value(queued_color).wont_be :valid?
+  #
+  #   queued_color.color = "51, 51, 51, 0"
+  #   value(queued_color).wont_be :valid?
+  # end
+  # TODO: Readd length validation when input length is known
+  
 end
