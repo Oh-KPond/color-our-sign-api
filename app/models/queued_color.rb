@@ -4,6 +4,6 @@ class QueuedColor < ApplicationRecord
   # TODO: Readd length validation when input length is known
 
   def countdown_time
-    return 100000
+    return 10000
   end
 end
