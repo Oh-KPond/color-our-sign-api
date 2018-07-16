@@ -24,5 +24,19 @@ describe QueuedColor do
   #   value(queued_color).wont_be :valid?
   # end
   # TODO: Readd length validation when input length is known
-  
+
+  describe "countdown_time" do
+    it "Should exist" do
+      queued_color.must_respond_to :countdown_time
+    end
+
+    it "should return the correct amount of time" do
+      # Given - 4 entries in the queued_color table see test/fixtures
+      # When - countdown_time calculated
+      # Then - countdown_time must be equal to 60000
+      queued_color.countdown_time.must_equal 60000
+    end
+
+  end
+
 end
