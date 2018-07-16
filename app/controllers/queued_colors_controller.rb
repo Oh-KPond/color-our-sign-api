@@ -18,7 +18,7 @@ class QueuedColorsController < ApplicationController
   def create
     color = QueuedColor.new(color_params)
     if color.save
-      render json: {id: color.id}, status: :ok
+      render json: {id: color.id, countdown: color.countdown_time}, status: :ok
     else
       render json: {ok: false, errors: color.errors}, status: :bad_request
     end
