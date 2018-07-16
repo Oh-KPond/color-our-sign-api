@@ -5,7 +5,11 @@ class QueuedColor < ApplicationRecord
 
   def countdown_time # default interval time 30 seconds = 30000 (07/16/18)
     count = QueuedColor.count
-    time = (count - 2) * 30000
-    return time
+    if count > 2
+      time = (count - 2) * 30000
+      return time
+    else
+      return 0
+    end
   end
 end
