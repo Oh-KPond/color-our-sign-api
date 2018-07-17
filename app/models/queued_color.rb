@@ -4,7 +4,7 @@ class QueuedColor < ApplicationRecord
   # validates :color, length: { in: 7..10 }
   # TODO: Readd length validation when input length is known
 
-  def self.countdown
+  def self.color_change
     count = QueuedColor.count
 
     scheduler = Rufus::Scheduler.new
@@ -13,7 +13,7 @@ class QueuedColor < ApplicationRecord
 
       scheduler.every '30s' do
         Rails.logger.info "time flies, it's now #{Time.now}"
-        
+
         displayed_color = DisplayedColor.new(color: QueuedColor.first.color)
         displayed_color.save
 
