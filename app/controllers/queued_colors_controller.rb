@@ -2,6 +2,7 @@ class QueuedColorsController < ApplicationController
 
   def index
     colors = QueuedColor.all
+    QueuedColor.countdown
     render json: colors.as_json, status: :ok
   end
 
