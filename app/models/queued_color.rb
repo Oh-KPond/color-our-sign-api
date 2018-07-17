@@ -12,8 +12,6 @@ class QueuedColor < ApplicationRecord
     if count > 0
 
       scheduler.every '30s' do
-        Rails.logger.info "time flies, it's now #{Time.now}"
-
         displayed_color = DisplayedColor.new(color: QueuedColor.first.color)
         displayed_color.save
 
