@@ -29,6 +29,8 @@ class QueuedColor < ApplicationRecord
     if count > 2
       time = (count - 2) * 30000
       return time
+    elsif count == 2
+      return 30000 # placeholder until I do calculated time for remaining time
     else
       return 0
     end

@@ -37,7 +37,7 @@ describe QueuedColor do
       queued_color.countdown_time.must_equal 60000
     end
 
-    it "should return 0 if there are 2 or less entries" do
+    it "should return 0 if there are less than 2 entries" do
       QueuedColor.destroy_all
 
       queued_color.countdown_time.must_equal 0
