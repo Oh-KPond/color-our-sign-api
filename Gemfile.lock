@@ -99,6 +99,7 @@ GEM
     puma (3.11.4)
     raabro (1.1.6)
     rack (2.0.5)
+    rack-cors (1.0.2)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails (5.2.0)
@@ -165,6 +166,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry-rails
   puma (~> 3.11)
+  rack-cors
   rails (~> 5.2.0)
   rufus-scheduler (~> 3.5)
   spring
