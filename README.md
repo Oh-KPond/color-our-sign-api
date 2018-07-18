@@ -15,7 +15,7 @@
 Lists all queues colors and their created at timestamps
 
 #### `GET /color`
-Returns single string with color information
+Returns single object with color information
 
 #### `POST /queued_colors`
 Create a new color in the queued colors.
