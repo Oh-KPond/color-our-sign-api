@@ -7,10 +7,10 @@ class QueuedColorsController < ApplicationController
 
   def color
     if QueuedColor.first == nil
-      no_color = DisplayedColor.last
-      render json: no_color.as_json, status: :ok
+      no_queued_color = DisplayedColor.last
+      render json: no_queued_color.as_json, status: :ok
     else
-      color = QueuedColor.first
+      color = QueuedColor.first.color_number
       render json: color.as_json, status: :ok
     end
   end
