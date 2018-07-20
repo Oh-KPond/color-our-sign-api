@@ -6,7 +6,7 @@ class QueuedColor < ApplicationRecord
   # TODO: Readd length validation when input length is known
 
   # default interval time 30 seconds = 30000 (07/16/18)
-  DURATION_TIME = 30
+  DURATION_TIME = 10
 
   def self.color_change
     count = QueuedColor.count
