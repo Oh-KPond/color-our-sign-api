@@ -77,6 +77,8 @@ class QueuedColor < ApplicationRecord
       return 11
     when '{"r":0,"g":102,"b":0,"a":1}' # '#006600'
       return 12
+    when 'rainbow' # rainbow colors
+      return 13
     else
       return 0
     end
