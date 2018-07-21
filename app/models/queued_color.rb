@@ -11,7 +11,6 @@ class QueuedColor < ApplicationRecord
   def self.color_change
     count = QueuedColor.count
 
-    # ActiveRecord::Base.connection_pool.with_connection do
     scheduler = Rufus::Scheduler.new
 
       if count > 0
@@ -22,15 +21,12 @@ class QueuedColor < ApplicationRecord
 
             QueuedColor.first.destroy
 
-            scheduler.shutdown
-
-            # if QueuedColor.first == nil
-            #   scheduler.shutdown
-            # end
+            if QueuedColor.first == nil
+              scheduler.shutdown
+            end
           end
         end
       end
-    # end
   end
 
   def countdown_time
