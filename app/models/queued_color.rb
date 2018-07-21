@@ -21,9 +21,11 @@ class QueuedColor < ApplicationRecord
 
           QueuedColor.first.destroy
 
-          if QueuedColor.first == nil
-            scheduler.shutdown
-          end
+          scheduler.shutdown
+
+          # if QueuedColor.first == nil
+          #   scheduler.shutdown
+          # end
         end
       end
     end
