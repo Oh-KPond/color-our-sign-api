@@ -30,7 +30,7 @@ class QueuedColor < ApplicationRecord
 
   def countdown_time
     count = QueuedColor.count
-    duration_seconds = (DURATION_TIME * 1000 + 5000)
+    duration_seconds = ((DURATION_TIME * 1000) + 2000)
 
     # calulates remaining time if there is any
     if @@job.last_time == nil
@@ -47,7 +47,7 @@ class QueuedColor < ApplicationRecord
       total_remaining_time = time + remaining_time
       return total_remaining_time.round
     else
-      return 0
+      return 2000
     end
   end
 
