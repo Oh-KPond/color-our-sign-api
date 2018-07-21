@@ -11,10 +11,10 @@ class QueuedColor < ApplicationRecord
   def self.color_change
     count = QueuedColor.count
 
+    ActiveRecord::Base.connection_pool.with_connection do
     scheduler = Rufus::Scheduler.new
 
-    if count > 0
-      ActiveRecord::Base.connection_pool.with_connection do
+      if count > 0
         @@job = scheduler.schedule_every("#{DURATION_TIME.to_s}s",  :allow_overlapping => false) do
           displayed_color = DisplayedColor.new(color: QueuedColor.first.color_number)
           displayed_color.save
