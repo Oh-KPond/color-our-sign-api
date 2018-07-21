@@ -12,11 +12,10 @@ class QueuedColor < ApplicationRecord
     count = QueuedColor.count
 
     # ActiveRecord::Base.connection_pool.with_connection do
-    # scheduler = Rufus::Scheduler.new
+    scheduler = Rufus::Scheduler.new
 
       if count > 0
         ActiveRecord::Base.connection_pool.with_connection do
-        scheduler = Rufus::Scheduler.new
           @@job = scheduler.schedule_every("#{DURATION_TIME.to_s}s",  :allow_overlapping => false) do
             displayed_color = DisplayedColor.new(color: QueuedColor.first.color_number)
             displayed_color.save
@@ -25,9 +24,9 @@ class QueuedColor < ApplicationRecord
 
             scheduler.shutdown
 
-            if QueuedColor.first == nil
-              scheduler.shutdown
-            end
+            # if QueuedColor.first == nil
+            #   scheduler.shutdown
+            # end
           end
         end
       end
