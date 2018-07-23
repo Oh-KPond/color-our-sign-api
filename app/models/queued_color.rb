@@ -11,7 +11,7 @@ class QueuedColor < ApplicationRecord
   def self.color_change
     count = QueuedColor.count
 
-    ActiveRecord::Base.connection_pool.with_connection do
+    ActiveRecord::Base.connection_pool.release_connection do
     scheduler = Rufus::Scheduler.new
 
       if count > 0
