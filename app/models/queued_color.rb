@@ -5,28 +5,28 @@ class QueuedColor < ApplicationRecord
   # validates :color, length: { in: 7..10 }
   # TODO: Readd length validation when input length is known
 
-  # default interval time 30 seconds = 30000 (07/16/18)
+  # default interval time 10 seconds = 10000 (07/20/18)
   DURATION_TIME = 10
 
   def self.color_change
     count = QueuedColor.count
 
+    ActiveRecord::Base.connection_pool.with_connection do
     scheduler = Rufus::Scheduler.new
 
       if count > 0
-        ActiveRecord::Base.connection_pool.with_connection do
-          @@job = scheduler.schedule_every("#{DURATION_TIME.to_s}s",  :allow_overlapping => false) do
-            displayed_color = DisplayedColor.new(color: QueuedColor.first.color_number)
-            displayed_color.save
+        @@job = scheduler.schedule_every("#{DURATION_TIME.to_s}s",  :allow_overlapping => false) do
+          displayed_color = DisplayedColor.new(color: QueuedColor.first.color_number)
+          displayed_color.save
 
-            QueuedColor.first.destroy
+          QueuedColor.first.destroy
 
-            if QueuedColor.first == nil
-              scheduler.shutdown
-            end
+          if QueuedColor.first == nil
+            scheduler.shutdown
           end
         end
       end
+    end
   end
 
   def countdown_time
