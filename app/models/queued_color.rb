@@ -23,6 +23,7 @@ class QueuedColor < ApplicationRecord
 
           if QueuedColor.first == nil
             scheduler.shutdown
+            ActiveRecord::Base.connection_pool.release_connection
           end
         end
       end
