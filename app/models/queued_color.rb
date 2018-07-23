@@ -3,7 +3,7 @@ class QueuedColor < ApplicationRecord
   require 'rufus-scheduler'
   validates :color, presence: true
   # validates :color, length: { in: 7..10 }
-  # TODO: Readd length validation when input length is known
+  # TODO: Read length validation when input length is known
 
   # default interval time 10 seconds = 10000 (07/20/18)
   DURATION_TIME = 10
