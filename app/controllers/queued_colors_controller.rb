@@ -20,11 +20,12 @@ class QueuedColorsController < ApplicationController
 
   def create
     color = QueuedColor.new(color_params)
+    postion = QueuedColor.count - 1
     if color.save
       if QueuedColor.count == 1
         QueuedColor.color_change
       end
-      render json: {id: color.id, countdown: color.countdown_time}, status: :ok
+      render json: {id: color.id, countdown: color.countdown_time, postion: postion }, status: :ok
     else
       render json: {ok: false, errors: color.errors}, status: :bad_request
     end
