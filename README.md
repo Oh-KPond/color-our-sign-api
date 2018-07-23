@@ -34,3 +34,8 @@ Request body:
 
 ## This App is deployed through Heroku
 - https://color-our-sign-api.herokuapp.com/
+
+
+## Links to Connecting Code (React App & Hardware Repos)
+- [Color Our Sign React App](https://github.com/Oh-KPond/color-our-sign)
+- [Color Our Sign Hardware](https://github.com/Oh-KPond/color-our-sign-feather)
