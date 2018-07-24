@@ -26,26 +26,16 @@ Request body:
 
 | Field         | Datatype            | Description
 |---------------|---------------------|------------
-| `color` | string             | Color chosen by user
+| `color` | string             | Color chosen by user in digit form
+
+## Installed Gems Include
+
+[rufus-scheduler](https://github.com/jmettraux/rufus-scheduler)
+
+## This App is deployed through Heroku
+- https://color-our-sign-api.herokuapp.com/
 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+## Links to Connecting Code (React App & Hardware Repos)
+- [Color Our Sign React App](https://github.com/Oh-KPond/color-our-sign)
+- [Color Our Sign Hardware](https://github.com/Oh-KPond/color-our-sign-feather)
