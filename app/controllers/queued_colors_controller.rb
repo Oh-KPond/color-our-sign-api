@@ -12,7 +12,7 @@ class QueuedColorsController < ApplicationController
     else
       color_num = {
         id: QueuedColor.first.id,
-        color: QueuedColor.first.color_number
+        color: QueuedColor.first.color
       }
       render json: color_num.as_json, status: :ok
     end
