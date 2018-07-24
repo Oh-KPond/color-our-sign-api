@@ -30,6 +30,7 @@ class QueuedColor < ApplicationRecord
     end
   end
 
+
   def countdown_time
     count = QueuedColor.count
     duration_seconds = ((DURATION_TIME * 1000) + 2000)
@@ -52,38 +53,5 @@ class QueuedColor < ApplicationRecord
       return 2000
     end
   end
-
-  # def color_number
-  #   case QueuedColor.first.color
-  #   when '{"r":255,"g":0,"b":0,"a":1}' # '#ff0000'
-  #     return 1
-  #   when '{"r":255,"g":165,"b":0,"a":1}' # '#ffa500'
-  #     return 2
-  #   when '{"r":255,"g":255,"b":0,"a":1}' # '#ffff00'
-  #     return 3
-  #   when '{"r":0,"g":255,"b":0,"a":1}' # '#00ff00'
-  #     return 4
-  #   when '{"r":0,"g":0,"b":255,"a":1}' # '#0000ff'
-  #     return 5
-  #   when '{"r":85,"g":26,"b":139,"a":1}' # '#551a8b'
-  #     return 6
-  #   when '{"r":3,"g":169,"b":244,"a":1}' # '#03a9f4'
-  #     return 7
-  #   when '{"r":233,"g":30,"b":99,"a":1}' # '#e91e63'
-  #     return 8
-  #   when '{"r":0,"g":150,"b":136,"a":1}' #'#009688'
-  #     return 9
-  #   when '{"r":128,"g":0,"b":0,"a":1}' # '#800000'
-  #     return 10
-  #   when '{"r":255,"g":0,"b":255,"a":1}' # '#ff00ff'
-  #     return 11
-  #   when '{"r":0,"g":102,"b":0,"a":1}' # '#006600'
-  #     return 12
-  #   when '{"r":0,"g":0,"b":0}' # rainbow colors
-  #     return 13
-  #   else
-  #     return 0
-  #   end
-  #
-  # end
+  
 end
