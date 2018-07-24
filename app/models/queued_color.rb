@@ -16,7 +16,7 @@ class QueuedColor < ApplicationRecord
 
       if count > 0
         @@job = scheduler.schedule_every("#{DURATION_TIME.to_s}s",  :allow_overlapping => false) do
-          displayed_color = DisplayedColor.new(color: QueuedColor.first.color_number)
+          displayed_color = DisplayedColor.new(color: QueuedColor.first.color)
           displayed_color.save
 
           QueuedColor.first.destroy
@@ -53,5 +53,5 @@ class QueuedColor < ApplicationRecord
       return 2000
     end
   end
-  
+
 end
