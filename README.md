@@ -39,3 +39,6 @@ Request body:
 ## Links to Connecting Code (React App & Hardware Repos)
 - [Color Our Sign React App](https://github.com/Oh-KPond/color-our-sign)
 - [Color Our Sign Hardware](https://github.com/Oh-KPond/color-our-sign-feather)
+
+### Note
+- Development API is created when a Pull Request is made. See [Review Apps](https://devcenter.heroku.com/articles/github-integration-review-apps) for more information
