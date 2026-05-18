@@ -91,5 +91,29 @@ describe QueuedColorsController do
       body.must_include "errors"
       body["errors"].must_include "color"
     end
+
+    it "rejects POST when queue is at capacity" do
+      QueuedColor.destroy_all
+      QueuedColor::MAX_QUEUE_SIZE.times { |i| QueuedColor.create!(color: "#{i % 256}, 0, 0") }
+
+      proc {
+        post queued_colors_url, params: { color: "200, 200, 200" }
+      }.wont_change "QueuedColor.count"
+
+      must_respond_with :service_unavailable
+      body = JSON.parse(response.body)
+      body["ok"].must_equal false
+    end
+
+    it "rate limits after 10 requests per minute" do
+      QueuedColor.destroy_all
+      10.times do
+        post queued_colors_url, params: { color: "51, 51, 51" }
+        must_respond_with :success
+      end
+
+      post queued_colors_url, params: { color: "51, 51, 51" }
+      must_respond_with :too_many_requests
+    end
   end
 end

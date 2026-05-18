@@ -21,4 +21,12 @@ describe DisplayedColor do
     value(displayed_color).wont_be :valid?
     displayed_color.errors.must_include :color
   end
+
+  it "prunes history to MAX_HISTORY entries on create" do
+    DisplayedColor.destroy_all
+    (DisplayedColor::MAX_HISTORY + 5).times do |i|
+      DisplayedColor.create!(color: "#{i % 256}, 0, 0")
+    end
+    DisplayedColor.count.must_equal DisplayedColor::MAX_HISTORY
+  end
 end

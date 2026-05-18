@@ -1,4 +1,9 @@
 class QueuedColorsController < ApplicationController
+  rate_limit to: 10, within: 1.minute, only: :create, with: -> {
+    render json: { ok: false, error: "Too many requests. Please slow down." },
+           status: :too_many_requests
+  }
+
   def index
     colors = QueuedColor.all
     render json: colors.as_json, status: :ok
@@ -19,6 +24,12 @@ class QueuedColorsController < ApplicationController
   end
 
   def create
+    if QueuedColor.count >= QueuedColor::MAX_QUEUE_SIZE
+      render json: { ok: false, error: "Queue is full, please try again in a moment." },
+             status: :service_unavailable
+      return
+    end
+
     color = QueuedColor.new(color_params)
     if color.save
       schedule_next_display_if_needed

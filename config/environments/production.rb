@@ -11,6 +11,9 @@ Rails.application.configure do
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.silence_polling = true
 
+  config.force_ssl = true
+  config.cache_store = :memory_store
+
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter

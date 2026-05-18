@@ -12,4 +12,8 @@ Minitest::Reporters.use!(
 
 class ActiveSupport::TestCase
   fixtures :all
+
+  setup do
+    Rails.cache.clear
+  end
 end

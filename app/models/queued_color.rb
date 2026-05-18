@@ -1,6 +1,7 @@
 class QueuedColor < ApplicationRecord
-  DURATION_TIME = 10  # seconds per color
-  BUFFER_MS = 2000    # 2s processing buffer added to displayed time
+  DURATION_TIME  = 10    # seconds per color
+  BUFFER_MS      = 2000  # 2s processing buffer added to displayed time
+  MAX_QUEUE_SIZE = 50    # reject POSTs when queue is at or above this size
 
   validates :color, presence: true
   validates :color, format: { with: /\A\d{1,3},\s?\d{1,3},\s?\d{1,3}\z/,
