@@ -20,55 +20,54 @@ class CreateSolidQueueTables < ActiveRecord::Migration[8.0]
     end
 
     create_table :solid_queue_scheduled_executions do |t|
-      t.references :job, null: false, foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
+      t.references :job, null: false, index: { unique: true },
+                          foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
       t.string     :queue_name, null: false
       t.integer    :priority, default: 0, null: false
       t.datetime   :scheduled_at, null: false
       t.timestamps
 
-      t.index [:job_id], unique: true
       t.index [:scheduled_at, :priority, :job_id]
     end
 
     create_table :solid_queue_ready_executions do |t|
-      t.references :job, null: false, foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
+      t.references :job, null: false, index: { unique: true },
+                          foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
       t.string     :queue_name, null: false
       t.integer    :priority, default: 0, null: false
       t.timestamps
 
-      t.index [:job_id], unique: true
       t.index [:priority, :job_id]
       t.index [:queue_name, :priority, :job_id]
     end
 
     create_table :solid_queue_claimed_executions do |t|
-      t.references :job, null: false, foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
+      t.references :job, null: false, index: { unique: true },
+                          foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
       t.bigint     :process_id
       t.timestamps
 
-      t.index [:job_id], unique: true
       t.index [:process_id, :job_id]
     end
 
     create_table :solid_queue_blocked_executions do |t|
-      t.references :job, null: false, foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
+      t.references :job, null: false, index: { unique: true },
+                          foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
       t.string     :queue_name, null: false
       t.integer    :priority, default: 0, null: false
       t.string     :concurrency_key, null: false
       t.datetime   :expires_at, null: false
       t.timestamps
 
-      t.index [:job_id], unique: true
       t.index [:expires_at]
       t.index [:concurrency_key, :priority, :job_id]
     end
 
     create_table :solid_queue_failed_executions do |t|
-      t.references :job, null: false, foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
+      t.references :job, null: false, index: { unique: true },
+                          foreign_key: { to_table: :solid_queue_jobs, on_delete: :cascade }
       t.text       :error
       t.timestamps
-
-      t.index [:job_id], unique: true
     end
 
     create_table :solid_queue_pauses do |t|

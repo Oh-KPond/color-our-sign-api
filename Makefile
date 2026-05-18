@@ -1,4 +1,4 @@
-.PHONY: setup start stop test console migrate logs
+.PHONY: setup start stop test console migrate logs reset
 
 setup: ## First-time setup: build image, install gems, create and migrate DB
 	docker-compose build
@@ -22,3 +22,7 @@ migrate: ## Run pending migrations
 
 logs: ## Tail container logs
 	docker-compose logs -f
+
+reset: ## Wipe the dev database and start fresh
+	docker-compose down -v
+	$(MAKE) setup

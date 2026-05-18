@@ -6,7 +6,7 @@ FROM docker.io/library/ruby:${RUBY_VERSION}-slim AS dev
 WORKDIR /rails
 
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev curl && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev curl && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BUNDLE_PATH=/usr/local/bundle \
@@ -25,7 +25,7 @@ FROM docker.io/library/ruby:${RUBY_VERSION}-slim AS build
 WORKDIR /rails
 
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 ENV BUNDLE_DEPLOYMENT=1 \
