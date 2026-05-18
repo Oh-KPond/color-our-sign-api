@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  color: MyString
+  color: 51, 51, 51
 
 two:
-  color: MyString
+  color: 61, 61, 61

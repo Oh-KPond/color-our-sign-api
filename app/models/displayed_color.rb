@@ -1,6 +1,5 @@
 class DisplayedColor < ApplicationRecord
   validates :color, presence: true
-  # validates :color, length: { in: 7..10 }
-  # TODO: Readd length validation when input length is known
-
+  validates :color, format: { with: /\A\d{1,3},\s?\d{1,3},\s?\d{1,3}\z/,
+                               message: "must be RGB format like '51, 51, 51'" }
 end
