@@ -1,57 +1,23 @@
 class QueuedColor < ApplicationRecord
-  require 'date'
-  require 'rufus-scheduler'
+  DURATION_TIME  = 10    # seconds per color
+  BUFFER_MS      = 2000  # 2s processing buffer added to displayed time
+  MAX_QUEUE_SIZE = 50    # reject POSTs when queue is at or above this size
+
   validates :color, presence: true
-  # validates :color, length: { in: 7..10 }
-  # TODO: Read length validation when input length is known
+  validates :color, format: { with: /\A\d{1,3},\s?\d{1,3},\s?\d{1,3}\z/,
+                               message: "must be RGB format like '51, 51, 51'" }
 
-  # default interval time 10 seconds = 10000 (07/20/18)
-  DURATION_TIME = 10
-
-  def self.color_change
-    count = QueuedColor.count
-
-    ActiveRecord::Base.connection_pool.with_connection do
-    scheduler = Rufus::Scheduler.new
-
-      if count > 0
-        @@job = scheduler.schedule_every("#{DURATION_TIME.to_s}s",  :allow_overlapping => false) do
-          displayed_color = DisplayedColor.new(color: QueuedColor.first.color)
-          displayed_color.save
-
-          QueuedColor.first.destroy
-
-          if QueuedColor.first == nil
-            scheduler.shutdown
-            ActiveRecord::Base.connection_pool.release_connection
-          end
-        end
-      end
-    end
-  end
-
-
+  # Milliseconds until this color's turn to display.
   def countdown_time
-    count = QueuedColor.count
-    duration_seconds = ((DURATION_TIME * 1000) + 2000)
+    ids = QueuedColor.order(:created_at).pluck(:id)
+    position = ids.index(id)
+    return BUFFER_MS if position.nil?  # unsaved or already dequeued
 
-    # calulates remaining time if there is any
-    if @@job.last_time == nil
-      remaining_time = duration_seconds - ((Time.now.to_i - QueuedColor.first.created_at.to_i) * 1000)
-    else
-      remaining_time = duration_seconds - ((Time.now.to_i - @@job.last_time.seconds) * 1000)
-    end
+    duration_ms = (DURATION_TIME * 1000) + BUFFER_MS
+    last_display = DisplayedColor.maximum(:created_at)
+    elapsed_ms   = last_display ? ((Time.now - last_display) * 1000).to_i : 0
+    time_until_next = [duration_ms - elapsed_ms, 0].max
 
-    # calculates the countdown time
-    if count == 2
-      return remaining_time.round
-    elsif count > 2
-      time = (count - 2) * duration_seconds
-      total_remaining_time = time + remaining_time
-      return total_remaining_time.round
-    else
-      return 2000
-    end
+    time_until_next + (position * duration_ms)
   end
-
 end

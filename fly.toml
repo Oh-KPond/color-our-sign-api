@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for color-our-sign-api on 2026-05-17T22:01:25-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'color-our-sign-api'
+primary_region = 'sjc'
+console_command = '/rails/bin/rails console'
+
+[build]
+
+[env]
+  SOLID_QUEUE_IN_PUMA = "1"
+  RAILS_LOG_TO_STDOUT = "1"
+  RAILS_SERVE_STATIC_FILES = "1"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpus = 1
+  cpu_kind = 'shared'
